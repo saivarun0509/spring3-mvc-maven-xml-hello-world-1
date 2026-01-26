@@ -1,14 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="
+           http://maven.apache.org/POM/4.0.0
+           http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ncodeit</groupId>
     <artifactId>ncodeit-hello-world</artifactId>
-    <version>3.0</version>
     <packaging>war</packaging>
+    <version>3.0</version>
 
     <name>spring3 mvc maven</name>
 
@@ -20,7 +21,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -32,46 +32,29 @@
             <artifactId>jstl</artifactId>
             <version>${jstl.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
 
-            <!-- Maven Compiler Plugin (FIXED) -->
+            <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
                 </configuration>
             </plugin>
 
-            <!-- Jetty Plugin -->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.2.11.v20150529</version>
-                <configuration>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <webApp>
-                        <contextPath>/spring3</contextPath>
-                    </webApp>
-                </configuration>
-            </plugin>
-
-            <!-- Eclipse Plugin (Cleaned) -->
+            <!-- WAR Plugin (modern & JDK 8 compatible) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
                 <configuration>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                    <wtpversion>2.0</wtpversion>
-                    <wtpContextName>spring3</wtpContextName>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
 
@@ -79,3 +62,4 @@
     </build>
 
 </project>
+
