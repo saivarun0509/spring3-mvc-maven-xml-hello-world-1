@@ -1,0 +1,59 @@
+@Library('common-lib') _
+
+pipeline {
+    agent any
+
+    tools {
+        jdk 'jdk8'
+        maven 'maven3'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    commonStages.checkoutCode(
+                        'https://github.com/lerockwins/spring3-mvc-maven-xml-hello-world-1.git',
+                        'master'
+                    )
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    commonStages.buildApp()
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    commonStages.testApp()
+                }
+            }
+        }
+
+        stage('Package') {
+            steps {
+                script {
+                    commonStages.packageApp()
+                }
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline executed using Shared Library"
+        }
+    }
+}
